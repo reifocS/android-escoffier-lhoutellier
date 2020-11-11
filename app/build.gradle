@@ -27,6 +27,7 @@ dependencies {
             'androidx.appcompat:appcompat:1.2.0',
             'com.google.android.material:material:1.2.1',
             'androidx.constraintlayout:constraintlayout:2.0.4')
+    implementation('com.jakewharton.timber:timber:4.7.1')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

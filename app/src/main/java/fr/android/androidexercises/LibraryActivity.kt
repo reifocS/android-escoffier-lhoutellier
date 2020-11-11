@@ -10,7 +10,7 @@ class LibraryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_library)
 
         // Plant logger cf. Android Timber
-        // Timber.plant(new Timber.DebugTree());
+        //Timber.plant(Timber.DebugTree())
 
         // TODO build Retrofit
 
