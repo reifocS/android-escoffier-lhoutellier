@@ -4,7 +4,6 @@ apply from: '../versions.gradle'
 
 android {
     compileSdkVersion versions.compile_sdk_version
-    buildToolsVersion versions.build_tools_version
 
     defaultConfig {
         applicationId "fr.android.androidexercises"
