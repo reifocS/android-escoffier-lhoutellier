@@ -38,11 +38,9 @@ dependencies {
             "androidx.constraintlayout:constraintlayout:$versions.constraintlayout_version",
             "com.jakewharton.timber:timber:$versions.timber_version",
             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version",
-            // TODO add Retrofit
-
-            // TODO add GSon converter for Retrofit
-
-            // TODO add Timber
+            "com.squareup.retrofit2:retrofit:2.9.0",
+            "com.squareup.retrofit2:converter-gson:2.9.0",
+            'androidx.fragment:fragment-ktx:1.1.0',
     )
 }
 
