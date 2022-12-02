@@ -1,4 +1,4 @@
-package fr.android.androidexercises
+package fr.android.escoffier_lhoutellier
 
 import retrofit2.http.GET
 

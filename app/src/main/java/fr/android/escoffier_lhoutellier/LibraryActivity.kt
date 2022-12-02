@@ -1,4 +1,4 @@
-package fr.android.androidexercises
+package fr.android.escoffier_lhoutellier
 
 import android.os.Bundle
 import android.widget.Toast
