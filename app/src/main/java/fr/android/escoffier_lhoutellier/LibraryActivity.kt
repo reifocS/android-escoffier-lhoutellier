@@ -1,7 +1,7 @@
 package fr.android.escoffier_lhoutellier
 
 import android.os.Bundle
-import android.widget.Toast
+import android.widget.ListView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
@@ -48,16 +48,16 @@ class LibraryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
 
+        val listView = findViewById<ListView>(R.id.bookListView)
+        val bookAdapter = BookAdapter(this, emptyList())
+        listView.adapter = bookAdapter
+
         viewModel.state.observe(this) { state ->
-            Toast.makeText(
-                this@LibraryActivity,
-                "${state.books.size} books | isLoading ${state.isLoading}",
-                Toast.LENGTH_SHORT
-            )
-                .show()
+            bookAdapter.books = state.books
+            bookAdapter.notifyDataSetChanged()
         }
 
         viewModel.loadBooks()
     }
-
 }
+
