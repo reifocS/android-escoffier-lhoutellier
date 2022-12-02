@@ -46,6 +46,7 @@ dependencies {
             "com.squareup.retrofit2:retrofit:2.9.0",
             "com.squareup.retrofit2:converter-gson:2.9.0",
             'androidx.fragment:fragment-ktx:1.1.0',
+            "com.squareup.picasso:picasso:$versions.picasso_version"
     )
 }
 

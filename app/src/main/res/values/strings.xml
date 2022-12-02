@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Library</string>
     <string name="action_settings">Settings</string>
+    <string name="book_cover">book cover</string>
+    <string name="placeholder_book_title">La coupe de feu</string>
+    <string name="placeholder_book_price">35€</string>
 </resources>

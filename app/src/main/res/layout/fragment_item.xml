@@ -8,11 +8,20 @@
         android:id="@+id/bookTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/text_margin"
+        android:text="@string/placeholder_book_title"
         android:textAppearance="?attr/textAppearanceListItem" />
 
     <TextView
         android:id="@+id/bookPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="@string/placeholder_book_price"
         android:textAppearance="?attr/textAppearanceListItem" />
+
+    <ImageView
+        android:id="@+id/bookImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/book_cover" />
 </LinearLayout>

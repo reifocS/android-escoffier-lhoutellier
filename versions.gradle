@@ -12,5 +12,6 @@ ext.versions = [
         rxandroid_version       : "2.1.1",
         coroutines_version      : "1.4.1",
         constraintlayout_version: "2.0.4",
+        picasso_version         : "2.8",
         timber_version          : "4.7.1"
 ]
