@@ -16,30 +16,30 @@
 
         <ImageView
             android:id="@+id/bookImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_gravity="center"
             android:contentDescription="@string/book_cover" />
 
         <TextView
             android:id="@+id/bookTitle"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
 
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_marginStart="10dp"
-            android:text="Item"
+            android:text="Henri Potier à l'école des sorciers"
+            android:textAlignment="center"
+            android:gravity="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/bookPrice"
-            android:layout_width="wrap_content"
-
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="10dp"
+            android:gravity="center"
             android:text="Item"
+            android:textAlignment="center"
             android:textSize="20sp"
             android:textStyle="bold" />
 
