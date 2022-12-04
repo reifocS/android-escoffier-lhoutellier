@@ -13,11 +13,14 @@ class LibraryActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("onCreate LibraryActivity")
         setContentView(R.layout.activity_library)
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.containerFrameLayout, BookFragment())
+            .replace(R.id.containerFrameLayout, BooksFragment())
+            .addToBackStack(BooksFragment::class.java.name)
             .commit()
     }
+
 }
 

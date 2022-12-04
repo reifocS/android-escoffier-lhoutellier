@@ -4,4 +4,6 @@
     <string name="book_cover">book cover</string>
     <string name="placeholder_book_title">La coupe de feu</string>
     <string name="placeholder_book_price">35€</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

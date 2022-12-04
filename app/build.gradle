@@ -6,7 +6,7 @@ android {
     compileSdkVersion versions.compile_sdk_version
 
     defaultConfig {
-        applicationId "fr.android.androidexercises"
+        applicationId "fr.android.escoffier_lhoutellier"
         minSdkVersion versions.min_sdk_version
         targetSdkVersion versions.target_sdk_version
         versionCode 1
