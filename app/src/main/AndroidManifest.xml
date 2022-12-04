@@ -3,17 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="fr.android.escoffier_lhoutellier">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name="fr.android.escoffier_lhoutellier.LibraryActivity"
+            android:name=".BookActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LibraryActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>

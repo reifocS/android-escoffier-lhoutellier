@@ -1,13 +1,14 @@
 package fr.android.escoffier_lhoutellier
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import fr.android.escoffier_lhoutellier.databinding.FragmentItemBinding
+
 
 class MyBookRecyclerViewAdapter(
     var values: List<Book>
@@ -39,13 +40,10 @@ class MyBookRecyclerViewAdapter(
             .into(holder.img)
         holder.img.setOnClickListener {
             // Create and show the fragment that shows the book synopsis
-            val fragment = BookFragment.newInstance(item)
-            val fragmentTransaction =
-                (holder.itemView.context as LibraryActivity).supportFragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.containerFrameLayout, fragment)
-            fragmentTransaction.addToBackStack(BookFragment.javaClass.name)
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-            fragmentTransaction.commit()
+            val context = holder.itemView.context as LibraryActivity
+            val intent = Intent(context, BookActivity::class.java)
+            intent.putExtra(BookActivity.BOOK, item)
+            context.startActivityForResult(intent, LibraryActivity.fromActivityRequest)
         }
     }
 

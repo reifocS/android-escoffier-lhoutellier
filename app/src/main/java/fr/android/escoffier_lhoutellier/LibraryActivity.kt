@@ -15,6 +15,9 @@ data class LibraryState(
 class LibraryActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<BookViewModel>()
+    companion object {
+        const val fromActivityRequest = 42
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
