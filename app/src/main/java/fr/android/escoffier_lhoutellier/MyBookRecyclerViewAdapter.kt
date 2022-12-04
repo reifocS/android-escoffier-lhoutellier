@@ -43,7 +43,7 @@ class MyBookRecyclerViewAdapter(
             val fragmentTransaction =
                 (holder.itemView.context as LibraryActivity).supportFragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.containerFrameLayout, fragment)
-            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.addToBackStack(BookFragment.javaClass.name)
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             fragmentTransaction.commit()
         }
