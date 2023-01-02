@@ -1,24 +1,28 @@
-package fr.android.escoffier_lhoutellier
+package fr.android.escoffier_lhoutellier.views
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import fr.android.escoffier_lhoutellier.adapters.MyBookRecyclerViewAdapter
+import fr.android.escoffier_lhoutellier.R
+import fr.android.escoffier_lhoutellier.data.Book
+import fr.android.escoffier_lhoutellier.data.Cart
 import fr.android.escoffier_lhoutellier.repositories.BookViewModel
-
-data class LibraryState(
-    val books: List<Book> = emptyList(),
-    val isLoading: Boolean
-)
 
 class LibraryActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<BookViewModel>()
+    private val cart = Cart()
+
     companion object {
         const val fromActivityRequest = 42
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         println("onCreate LibraryActivity")
@@ -41,8 +45,24 @@ class LibraryActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
 
-        viewModel.loadBooks();
+        try {
+            viewModel.loadBooks()
+        } catch (e: Exception) {
+            // Handle exceptions thrown by the ViewModel
+        }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        println("OnActivityResult")
+        println("${cart.getBooks()}, $resultCode, $requestCode")
+        if(requestCode == fromActivityRequest) {
+            val book = data?.getParcelableExtra<Book>(BookActivity.CART)
+
+            if (book != null) {
+                cart.add(book)
+            }
+        }
+    }
 }
 

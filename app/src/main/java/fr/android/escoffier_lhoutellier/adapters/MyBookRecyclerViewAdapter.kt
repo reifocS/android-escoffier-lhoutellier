@@ -1,4 +1,4 @@
-package fr.android.escoffier_lhoutellier
+package fr.android.escoffier_lhoutellier.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -7,7 +7,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
+import fr.android.escoffier_lhoutellier.data.Book
 import fr.android.escoffier_lhoutellier.databinding.FragmentItemBinding
+import fr.android.escoffier_lhoutellier.views.BookActivity
+import fr.android.escoffier_lhoutellier.views.LibraryActivity
 
 
 class MyBookRecyclerViewAdapter(

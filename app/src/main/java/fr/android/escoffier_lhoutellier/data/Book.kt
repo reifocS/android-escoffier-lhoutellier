@@ -1,4 +1,4 @@
-package fr.android.escoffier_lhoutellier
+package fr.android.escoffier_lhoutellier.data
 
 import android.os.Parcel
 import android.os.Parcelable
