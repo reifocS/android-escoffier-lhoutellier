@@ -5,12 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.CartActivity">
+
+    <TextView
+        android:id="@+id/cartActivityTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="My cart"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/cartList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         app:layoutManager="LinearLayoutManager"
-        tools:listitem="@layout/fragment_item" />
+        app:layout_constraintTop_toBottomOf="@id/cartActivityTitle"
+        tools:listitem="@layout/fragment_cart" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Purchase"
+        app:layout_constraintTop_toBottomOf="@id/cartList" />
 </androidx.constraintlayout.widget.ConstraintLayout>

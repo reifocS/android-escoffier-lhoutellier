@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="fr.android.escoffier_lhoutellier" >
+    package="fr.android.escoffier_lhoutellier">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,17 +11,17 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:ignore="AllowBackup,GoogleAppIndexingWarning" >
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".Cart"
-            android:exported="false" >
+            android:name=".views.CartActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".views.BookActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -29,7 +29,7 @@
         <activity
             android:name=".views.LibraryActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme" >
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

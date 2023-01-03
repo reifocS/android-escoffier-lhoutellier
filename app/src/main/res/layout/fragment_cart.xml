@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/bookCartTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Henri Potier à l'école des sorciers"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/bookCartPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="20$"
+        app:layout_constraintTop_toBottomOf="@+id/bookCartTitle"
+        android:textAlignment="center"
+        android:textSize="20sp"
+       />
+    <TextView
+        android:id="@+id/bookCartQuantity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="2x"
+        app:layout_constraintTop_toBottomOf="@+id/bookCartPrice"
+        android:textAlignment="center"
+        android:textSize="20sp"
+         />
+</androidx.constraintlayout.widget.ConstraintLayout>
