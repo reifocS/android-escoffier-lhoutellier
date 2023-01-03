@@ -3,6 +3,7 @@ package fr.android.escoffier_lhoutellier.views
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +33,9 @@ class LibraryActivity : AppCompatActivity() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
 
+        val itemCountTextView = findViewById<TextView>(R.id.item_count)
 
+        itemCountTextView.text = cart.getBooks().size.toString()
         // This will pass the ArrayList to our Adapter
         val adapter = MyBookRecyclerViewAdapter(ArrayList())
 
@@ -56,11 +59,13 @@ class LibraryActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         println("OnActivityResult")
         println("${cart.getBooks()}, $resultCode, $requestCode")
-        if(requestCode == fromActivityRequest) {
+        if (requestCode == fromActivityRequest) {
             val book = data?.getParcelableExtra<Book>(BookActivity.CART)
 
             if (book != null) {
                 cart.add(book)
+                val itemCountTextView = findViewById<TextView>(R.id.item_count)
+                itemCountTextView.text = cart.getBooks().size.toString()
             }
         }
     }
