@@ -33,8 +33,8 @@ class CartActivity : AppCompatActivity() {
 
         purchaseButton.setOnClickListener {
             Toast.makeText(this, "Purchased", Toast.LENGTH_SHORT).show()
-            val intentCart = Intent()
             cart.empty()
+            val intentCart = Intent()
             intentCart.putExtra(NEWCART, cart)
             setResult(RESULT_OK, intentCart)
             finish()

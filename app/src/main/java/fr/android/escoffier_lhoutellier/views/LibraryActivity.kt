@@ -15,11 +15,11 @@ import fr.android.escoffier_lhoutellier.data.Book
 import fr.android.escoffier_lhoutellier.data.BookInCart
 import fr.android.escoffier_lhoutellier.data.Cart
 import fr.android.escoffier_lhoutellier.repositories.BookViewModel
+import fr.android.escoffier_lhoutellier.repositories.LibraryState
 
 class LibraryActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<BookViewModel>()
-    private var cart = Cart()
 
     companion object {
         const val fromActivityRequest = 42
@@ -36,25 +36,24 @@ class LibraryActivity : AppCompatActivity() {
         // this creates a vertical layout Manager
         recyclerview.layoutManager = LinearLayoutManager(this)
 
-        val itemCountTextView = findViewById<TextView>(R.id.item_count)
         val cartImageView = findViewById<ImageView>(R.id.cart_icon)
         val context = this@LibraryActivity
         cartImageView.setOnClickListener {
             val myIntent = Intent(context, CartActivity::class.java)
-            myIntent.putExtra(BookActivity.CART, cart)
+            myIntent.putExtra(BookActivity.CART, viewModel.state.value?.cart)
             context.startActivityForResult(myIntent, fromCartRequest)
         }
-        itemCountTextView.text = cart.getBooks().size.toString()
         // This will pass the ArrayList to our Adapter
         val adapter = MyBookRecyclerViewAdapter(ArrayList())
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
-
+        val itemCountTextView = findViewById<TextView>(R.id.item_count)
         //observe
         viewModel.state.observe(this) { state ->
             adapter.values = state.books
             adapter.notifyDataSetChanged()
+            itemCountTextView.text = state.cart.getBooks().sumOf { it.quantity }.toString()
         }
 
         try {
@@ -67,10 +66,10 @@ class LibraryActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         println("OnActivityResult")
+        val cart = viewModel.state.value?.cart!!
         println("${cart.getBooks()}, $resultCode, $requestCode")
         if (requestCode == fromActivityRequest) {
             val bookFromActivity = data?.getParcelableExtra<Book>(BookActivity.CART)
-
             if (bookFromActivity != null) {
                 var found = false
                 for (bookInCart in cart.getBooks()) {
@@ -83,16 +82,25 @@ class LibraryActivity : AppCompatActivity() {
                     val newEntry = BookInCart(bookFromActivity, 1)
                     cart.add(newEntry)
                 }
-                val itemCountTextView = findViewById<TextView>(R.id.item_count)
-                itemCountTextView.text = cart.getBooks().sumOf { it.quantity }.toString()
+                viewModel.state.postValue(
+                    LibraryState(
+                        viewModel.state.value!!.books,
+                        false,
+                        cart
+                    )
+                )
+
             }
-        }
-        else if (requestCode == fromCartRequest) {
+        } else if (requestCode == fromCartRequest) {
             val cartFromActivity = data?.getParcelableExtra<Cart>(CartActivity.NEWCART)
-            if(cartFromActivity != null) {
-                cart = cartFromActivity
-                val itemCountTextView = findViewById<TextView>(R.id.item_count)
-                itemCountTextView.text = cart.getBooks().sumOf { it.quantity }.toString()
+            if (cartFromActivity != null) {
+                viewModel.state.postValue(
+                    LibraryState(
+                        viewModel.state.value!!.books,
+                        false,
+                        cartFromActivity
+                    )
+                )
             }
         }
     }

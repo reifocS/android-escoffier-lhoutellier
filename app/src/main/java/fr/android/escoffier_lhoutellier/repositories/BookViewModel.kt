@@ -15,7 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 data class LibraryState(
     val books: List<Book> = emptyList(),
     val isLoading: Boolean,
-    //val cart: Cart = Cart()
+    var cart: Cart = Cart()
 )
 
 class BookViewModel : ViewModel() {
