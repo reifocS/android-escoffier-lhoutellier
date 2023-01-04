@@ -31,7 +31,7 @@ class CartRecyclerViewAdapter(
             append("€")
         }
         holder.title.text = item.title
-        holder.qty.text = "2x"
+        holder.qty.text = "Quantity: ${item.quantity}"
     }
 
     override fun getItemCount(): Int = values.size

@@ -30,6 +30,10 @@ class Cart() : Parcelable {
         return 0
     }
 
+    fun empty() {
+        books.clear()
+    }
+
     companion object CREATOR : Parcelable.Creator<Cart> {
         override fun createFromParcel(parcel: Parcel): Cart {
             return Cart(parcel)

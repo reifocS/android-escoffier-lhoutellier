@@ -9,7 +9,7 @@ data class Book(
     val price: String,
     val cover: String,
     val synopsis: List<String>,
-    val quantity: Int
+    var quantity: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -28,6 +28,18 @@ data class Book(
         parcel.writeString(cover)
         parcel.writeStringList(synopsis)
         parcel.writeInt(quantity)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Book
+
+        if (title != other.title) return false
+        if (price != other.price) return false
+
+        return true
     }
 
     override fun describeContents(): Int {
