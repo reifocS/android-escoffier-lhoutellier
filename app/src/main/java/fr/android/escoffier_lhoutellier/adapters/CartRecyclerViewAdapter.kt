@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.escoffier_lhoutellier.data.Book
+import fr.android.escoffier_lhoutellier.data.BookInCart
 import fr.android.escoffier_lhoutellier.databinding.FragmentCartBinding
 
 class CartRecyclerViewAdapter(
-    var values: List<Book>
+    var values: List<BookInCart>
 ) : RecyclerView.Adapter<CartRecyclerViewAdapter.ViewHolder>() {
 
 
@@ -27,10 +28,10 @@ class CartRecyclerViewAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
         holder.price.text = buildString {
-            append(item.price)
+            append(item.book.price)
             append("€")
         }
-        holder.title.text = item.title
+        holder.title.text = item.book.title
         holder.qty.text = "Quantity: ${item.quantity}"
     }
 

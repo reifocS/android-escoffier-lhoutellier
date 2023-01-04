@@ -9,7 +9,6 @@ data class Book(
     val price: String,
     val cover: String,
     val synopsis: List<String>,
-    var quantity: Int
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
@@ -17,7 +16,6 @@ data class Book(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.createStringArrayList()!!,
-        parcel.readInt()
     ) {
     }
 
@@ -27,7 +25,6 @@ data class Book(
         parcel.writeString(price)
         parcel.writeString(cover)
         parcel.writeStringList(synopsis)
-        parcel.writeInt(quantity)
     }
 
     override fun equals(other: Any?): Boolean {

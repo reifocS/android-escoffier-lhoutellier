@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import fr.android.escoffier_lhoutellier.data.Book
+import fr.android.escoffier_lhoutellier.data.Cart
 import fr.android.escoffier_lhoutellier.services.HenriPotierService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,7 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 data class LibraryState(
     val books: List<Book> = emptyList(),
-    val isLoading: Boolean
+    val isLoading: Boolean,
+    //val cart: Cart = Cart()
 )
 
 class BookViewModel : ViewModel() {

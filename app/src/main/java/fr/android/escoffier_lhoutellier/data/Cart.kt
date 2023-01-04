@@ -4,21 +4,21 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Cart() : Parcelable {
-    private val books: MutableList<Book> = ArrayList()
+    private val books: MutableList<BookInCart> = ArrayList()
 
     constructor(parcel: Parcel) : this() {
         parcel.readList(books, Book::class.java.classLoader)
     }
 
-    fun getBooks(): List<Book> {
+    fun getBooks(): List<BookInCart> {
         return books
     }
 
-    fun add(book: Book) {
+    fun add(book: BookInCart) {
         books.add(book)
     }
 
-    fun remove(book: Book) {
+    fun remove(book: BookInCart) {
         books.remove(book)
     }
 
