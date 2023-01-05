@@ -2,47 +2,52 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="160dp"
+    android:layout_height="260dp"
     android:layout_margin="10dp"
-    app:cardElevation="6dp">
+    app:cardCornerRadius="4dp"
+    app:cardElevation="4dp">
 
-    <LinearLayout
+    <RelativeLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:padding="5dp">
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/bookImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:contentDescription="@string/book_cover" />
+            android:contentDescription="@string/book_cover"
+            android:scaleType="centerCrop" />
 
         <TextView
             android:id="@+id/bookTitle"
-            android:layout_width="match_parent"
-
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/bookImage"
+            android:layout_centerHorizontal="true"
             android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
             android:text="Henri Potier à l'école des sorciers"
             android:textAlignment="center"
-            android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/bookPrice"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/bookTitle"
+            android:layout_centerHorizontal="true"
             android:gravity="center"
             android:text="Item"
             android:textAlignment="center"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
 
-    </LinearLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

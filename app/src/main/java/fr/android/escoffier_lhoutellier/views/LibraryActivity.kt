@@ -1,13 +1,15 @@
 package fr.android.escoffier_lhoutellier.views
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.escoffier_lhoutellier.R
 import fr.android.escoffier_lhoutellier.adapters.MyBookRecyclerViewAdapter
@@ -15,6 +17,7 @@ import fr.android.escoffier_lhoutellier.data.Book
 import fr.android.escoffier_lhoutellier.data.BookInCart
 import fr.android.escoffier_lhoutellier.data.Cart
 import fr.android.escoffier_lhoutellier.repositories.BookViewModel
+
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -40,6 +43,14 @@ class LibraryActivity : AppCompatActivity() {
         }
 
     }
+    fun calculateNoOfColumns(
+        context: Context,
+        columnWidthDp: Double
+    ): Int { // For example columnWidthdp=180
+        val displayMetrics: DisplayMetrics = context.resources.displayMetrics
+        val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
+        return (screenWidthDp / columnWidthDp + 0.5).toInt()
+    }
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +60,7 @@ class LibraryActivity : AppCompatActivity() {
         val recyclerview = findViewById<RecyclerView>(R.id.bookList)
 
         // this creates a vertical layout Manager
-        recyclerview.layoutManager = LinearLayoutManager(this)
+        recyclerview.layoutManager = GridLayoutManager(this, calculateNoOfColumns(applicationContext, 180.0))
 
         val cartImageView = findViewById<ImageView>(R.id.cart_icon)
         val context = this@LibraryActivity
