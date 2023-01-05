@@ -1,11 +1,14 @@
 package fr.android.escoffier_lhoutellier.views
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.escoffier_lhoutellier.R
 import fr.android.escoffier_lhoutellier.adapters.CartRecyclerViewAdapter
@@ -30,6 +33,15 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
         super.onBackPressed()
     }
 
+    fun calculateNoOfColumns(
+        context: Context,
+        columnWidthDp: Double
+    ): Int { // For example columnWidthdp=180
+        val displayMetrics: DisplayMetrics = context.resources.displayMetrics
+        val screenWidthDp = displayMetrics.widthPixels / displayMetrics.density
+        return (screenWidthDp / columnWidthDp + 0.5).toInt()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         println("onCreate CartActivity")
@@ -37,6 +49,9 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
         cart = intent.getParcelableExtra(BookActivity.CART)!!
         println("carts: " + cart.getBooks().size)
         val recyclerview = findViewById<RecyclerView>(R.id.cartList)
+        recyclerview.layoutManager =
+            GridLayoutManager(this, calculateNoOfColumns(applicationContext, 180.0))
+
         val purchaseButton = findViewById<Button>(R.id.purchase)
         val books = cart.getBooks()
         adapter = CartRecyclerViewAdapter(books)
@@ -46,7 +61,11 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
         recyclerview.adapter = adapter
 
         purchaseButton.setOnClickListener {
-            Toast.makeText(this, "Purchased ${cart.getBooks().sumOf { it.quantity }} article", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this,
+                "Purchased ${cart.getBooks().sumOf { it.quantity }} article",
+                Toast.LENGTH_SHORT
+            ).show()
             cart.empty()
             val intentCart = Intent()
             intentCart.putExtra(NEWCART, cart)
