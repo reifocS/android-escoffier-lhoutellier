@@ -46,6 +46,7 @@ class LibraryActivity : AppCompatActivity() {
         // This will pass the ArrayList to our Adapter
         val adapter = MyBookRecyclerViewAdapter(ArrayList())
 
+
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
         val itemCountTextView = findViewById<TextView>(R.id.item_count)
