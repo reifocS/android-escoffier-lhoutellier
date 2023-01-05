@@ -7,16 +7,12 @@ import android.util.DisplayMetrics
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fr.android.escoffier_lhoutellier.R
 import fr.android.escoffier_lhoutellier.adapters.CartRecyclerViewAdapter
 import fr.android.escoffier_lhoutellier.adapters.OnItemClickListener
-import fr.android.escoffier_lhoutellier.data.Book
-import fr.android.escoffier_lhoutellier.data.BookInCart
 import fr.android.escoffier_lhoutellier.data.Cart
-import fr.android.escoffier_lhoutellier.repositories.LibraryState
 
 class CartActivity : AppCompatActivity(), OnItemClickListener {
     companion object {
@@ -59,18 +55,29 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
+        purchaseButton.text = "Purchase for ${
+            cart.getBooks().sumOf { it.quantity.toDouble() * it.book.price.toDouble() }
+        }€"
 
         purchaseButton.setOnClickListener {
-            Toast.makeText(
-                this,
-                "Purchased ${cart.getBooks().sumOf { it.quantity }} article",
-                Toast.LENGTH_SHORT
-            ).show()
-            cart.empty()
-            val intentCart = Intent()
-            intentCart.putExtra(NEWCART, cart)
-            setResult(RESULT_OK, intentCart)
-            finish()
+            if (cart.getBooks().isEmpty()) {
+                Toast.makeText(
+                    this,
+                    "Need to have at least one article in cart",
+                    Toast.LENGTH_SHORT
+                ).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Purchased ${cart.getBooks().sumOf { it.quantity }} article",
+                    Toast.LENGTH_SHORT
+                ).show()
+                cart.empty()
+                val intentCart = Intent()
+                intentCart.putExtra(NEWCART, cart)
+                setResult(RESULT_OK, intentCart)
+                finish()
+            }
         }
     }
 
@@ -83,5 +90,9 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
             cart.remove(bookToRemove)
         }
         adapter.notifyDataSetChanged()
+        val purchaseButton = findViewById<Button>(R.id.purchase)
+        purchaseButton.text = "Purchase for ${
+            cart.getBooks().sumOf { it.quantity.toDouble() * it.book.price.toDouble() }
+        }€"
     }
 }

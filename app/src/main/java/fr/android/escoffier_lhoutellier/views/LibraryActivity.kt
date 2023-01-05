@@ -16,7 +16,7 @@ import fr.android.escoffier_lhoutellier.adapters.MyBookRecyclerViewAdapter
 import fr.android.escoffier_lhoutellier.data.Book
 import fr.android.escoffier_lhoutellier.data.BookInCart
 import fr.android.escoffier_lhoutellier.data.Cart
-import fr.android.escoffier_lhoutellier.repositories.BookViewModel
+import fr.android.escoffier_lhoutellier.models.BookViewModel
 
 
 class LibraryActivity : AppCompatActivity() {

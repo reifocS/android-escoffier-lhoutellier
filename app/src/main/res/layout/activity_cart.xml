@@ -21,7 +21,6 @@
             app:layoutManager="LinearLayoutManager"
             tools:listitem="@layout/fragment_cart" />
 
-
         <Button
             android:id="@+id/purchase"
             android:layout_width="match_parent"

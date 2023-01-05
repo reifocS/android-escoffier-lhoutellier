@@ -1,4 +1,4 @@
-package fr.android.escoffier_lhoutellier.repositories
+package fr.android.escoffier_lhoutellier.models
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,7 +36,7 @@ class BookViewModel : ViewModel() {
 
     val state = MutableLiveData<LibraryState>()
 
-    fun setBooks(books: List<Book>) {
+    private fun setBooks(books: List<Book>) {
         val currentState = state.value ?: LibraryState(emptyList(), Cart())
         val newState = currentState.copy(books = books)
         state.postValue(newState)
