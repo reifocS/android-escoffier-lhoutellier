@@ -14,7 +14,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 data class LibraryState(
     val books: List<Book> = emptyList(),
-    val isLoading: Boolean,
     var cart: Cart = Cart()
 )
 
@@ -27,16 +26,27 @@ class BookViewModel : ViewModel() {
 
         val service: HenriPotierService = retrofit.create(HenriPotierService::class.java)
 
-        state.postValue(LibraryState(emptyList(), true))
-
         viewModelScope.launch(context = Dispatchers.Main) {
             val books = withContext(Dispatchers.IO) {
                 service.listBooks()
             }
-            state.postValue(LibraryState(books, false))
+            setBooks(books)
         }
     }
 
     val state = MutableLiveData<LibraryState>()
+
+    fun setBooks(books: List<Book>) {
+        val currentState = state.value ?: LibraryState(emptyList(), Cart())
+        val newState = currentState.copy(books = books)
+        state.postValue(newState)
+    }
+
+    fun setCart(newCart: Cart) {
+        val currentState = state.value ?: LibraryState(emptyList(), Cart())
+        val newState = currentState.copy(cart = newCart)
+        state.postValue(newState)
+    }
+
 }
 

@@ -15,7 +15,6 @@ import fr.android.escoffier_lhoutellier.data.Book
 import fr.android.escoffier_lhoutellier.data.BookInCart
 import fr.android.escoffier_lhoutellier.data.Cart
 import fr.android.escoffier_lhoutellier.repositories.BookViewModel
-import fr.android.escoffier_lhoutellier.repositories.LibraryState
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -24,6 +23,22 @@ class LibraryActivity : AppCompatActivity() {
     companion object {
         const val fromActivityRequest = 42
         const val fromCartRequest = 43
+        const val cartKey = "cartState"
+
+    }
+
+    public override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(cartKey, viewModel.state.value?.cart!!)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        savedInstanceState.getParcelable<Cart>(cartKey)?.let {
+            viewModel.setCart(it)
+        }
+
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -83,25 +98,13 @@ class LibraryActivity : AppCompatActivity() {
                     val newEntry = BookInCart(bookFromActivity, 1)
                     cart.add(newEntry)
                 }
-                viewModel.state.postValue(
-                    LibraryState(
-                        viewModel.state.value!!.books,
-                        false,
-                        cart
-                    )
-                )
+                viewModel.setCart(cart)
 
             }
         } else if (requestCode == fromCartRequest) {
             val cartFromActivity = data?.getParcelableExtra<Cart>(CartActivity.NEWCART)
             if (cartFromActivity != null) {
-                viewModel.state.postValue(
-                    LibraryState(
-                        viewModel.state.value!!.books,
-                        false,
-                        cartFromActivity
-                    )
-                )
+                viewModel.setCart(cartFromActivity)
             }
         }
     }

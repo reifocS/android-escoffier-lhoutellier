@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 
 class Cart() : Parcelable {
-    private val books: MutableList<BookInCart> = ArrayList()
+    private var books: MutableList<BookInCart> = ArrayList()
 
     constructor(parcel: Parcel) : this() {
         parcel.readList(books, Book::class.java.classLoader)
