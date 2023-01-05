@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -21,6 +22,7 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
 
     var cart: Cart = Cart()
     private lateinit var adapter: CartRecyclerViewAdapter
+    private lateinit var purchaseButton: Button
 
     override fun onBackPressed() {
         val intentCart = Intent()
@@ -48,16 +50,14 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
         recyclerview.layoutManager =
             GridLayoutManager(this, calculateNoOfColumns(applicationContext, 180.0))
 
-        val purchaseButton = findViewById<Button>(R.id.purchase)
+        purchaseButton = findViewById(R.id.purchase)
         val books = cart.getBooks()
         adapter = CartRecyclerViewAdapter(books)
         adapter.setOnItemClickListener(this)
 
         // Setting the Adapter with the recyclerview
         recyclerview.adapter = adapter
-        purchaseButton.text = "Purchase for ${
-            cart.getBooks().sumOf { it.quantity.toDouble() * it.book.price.toDouble() }
-        }€"
+        setPriceToButton()
 
         purchaseButton.setOnClickListener {
             if (cart.getBooks().isEmpty()) {
@@ -81,6 +81,12 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
+    private fun setPriceToButton() {
+        purchaseButton.text = "Purchase for ${
+            cart.getBooks().sumOf { it.quantity.toDouble() * it.book.price.toDouble() }
+        }€"
+    }
+
     override fun onItemClick(position: Int) {
         println("$position ${cart.getBooks()}")
         val bookToRemove = cart.getBooks()[position]
@@ -90,9 +96,6 @@ class CartActivity : AppCompatActivity(), OnItemClickListener {
             cart.remove(bookToRemove)
         }
         adapter.notifyDataSetChanged()
-        val purchaseButton = findViewById<Button>(R.id.purchase)
-        purchaseButton.text = "Purchase for ${
-            cart.getBooks().sumOf { it.quantity.toDouble() * it.book.price.toDouble() }
-        }€"
+        setPriceToButton()
     }
 }
